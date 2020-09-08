@@ -4,8 +4,8 @@ import bodyParser from "body-parser";
 import product from "./models/product.js";
 import category from "./models/category.js";
 
-const port = 5000;
 const app = express();
+app.set("port", process.env.PORT || 3000);
 app.use(bodyParser.json());
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -117,6 +117,6 @@ app.get("/products/count/:count", async (req, res) => {
 });
 
 //App listen on port
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+app.listen(app.get("port"), () => {
+  console.log(`Example app listening at http://localhost:${app.get("port")}`);
 });
