@@ -30,7 +30,7 @@ mongoose.connect(connect_url, {
 app.get("/", async (req, res) => {
   res.json({
     reponse:
-      "Thank your for using our product API. Check our valid endpoint and use it in your project. :)",
+      "Thank your for using our product API. Check our valid endpoints and them it in your project. :)",
   });
 });
 
