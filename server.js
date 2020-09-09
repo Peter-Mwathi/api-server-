@@ -74,8 +74,8 @@ app.get("/products/:productId", async (req, res) => {
 app.get("/products/search/:searchKey", async (req, res) => {
   try {
     const searchResults = await product.find({
-      title: {
-        $regex: `.*${req.params.searchKey}.`,
+      category: {
+        $regex: `.*${req.params.searchKey}.*`,
         $options: "i",
       },
     });
@@ -116,7 +116,33 @@ app.get("/products/count/:count", async (req, res) => {
   }
 });
 
+// ENDPOINT 6: fetch by cagetory
+app.get("/products/category/:category", async (req, res) => {
+  try {
+    const categoryString = req.params.category;
+    const searchResults = await product.find({
+      category: {
+        $regex: `.*${categoryString}.*`,
+        $options: "i",
+      },
+    });
+    if (searchResults.length > 0) {
+      res.json(searchResults);
+    } else {
+      res.json({
+        response:
+          "We could not match any item in the specified category. Try another category",
+      });
+    }
+  } catch {
+    res.json({
+      response:
+        "Server error or we could not match the category you provided. Try another category",
+    });
+  }
+});
+
 //App listen on port
 app.listen(app.get("port"), () => {
-  console.log(`Example app listening at http://localhost:${app.get("port")}`);
+  console.log(`Server running in port : ${app.get("port")}`);
 });
