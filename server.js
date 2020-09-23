@@ -58,6 +58,16 @@ app.get("/products", async (req, res) => {
   }
 });
 
+app.post("/post", (req, res) => {
+  const productData = req.body;
+  product.create(productData, (err, data) => {
+    if (err) {
+      res.json({ message: "an error occured " + err });
+    } else {
+      res.json({ message: "saved successfull" });
+    }
+  });
+});
 // ENDPOINT 4: Get specific item with specific Id when the user wants to get it
 app.get("/products/:productId", async (req, res) => {
   try {
