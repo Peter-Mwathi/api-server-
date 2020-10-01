@@ -80,7 +80,7 @@ app.get("/products/:productId", async (req, res) => {
   }
 });
 
-// ENDPOINT 4: a group of items
+// ENDPOINT 4: a group of items testing change
 app.get("/products/search/:searchKey", async (req, res) => {
   try {
     const searchResults = await product.find({
