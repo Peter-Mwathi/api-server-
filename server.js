@@ -84,7 +84,7 @@ app.get("/products/:productId", async (req, res) => {
 app.get("/products/search/:searchKey", async (req, res) => {
   try {
     const searchResults = await product.find({
-      category: {
+      title: {
         $regex: `.*${req.params.searchKey}.*`,
         $options: "i",
       },
